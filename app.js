@@ -1,4 +1,5 @@
 var express = require('express');
+var router = express.Router();
 var reactViews = require('express-react-views');
 var bodyParser = require('body-parser');
 var fs = require('fs');
@@ -17,8 +18,8 @@ app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-    res.header("X-Powered-By",' 3.2.1')
-    res.header("Content-Type", "application/json;charset=utf-8");
+    // res.header("X-Powered-By",' 3.2.1')
+    // res.header("Content-Type", "application/json;charset=utf-8");
     next();
 });
 
@@ -134,7 +135,21 @@ app.post('/api/post', function(req, res, next){
 	
 	res.render('api_tips', { title:'TIPS',msg: "add success!", url:url_path});
 });
+function getIPAdress(){  
+    var interfaces = require('os').networkInterfaces();  
+    for(var devName in interfaces){  
+          var iface = interfaces[devName];  
+          for(var i=0;i<iface.length;i++){  
+               var alias = iface[i];  
+               if(alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal){  
+                     return alias.address;  
+               }  
+          }  
+    }  
+} 
+
+var ip = getIPAdress()
 
 var server = app.listen(8892, function () {
-  console.log('app listening at post 8892');
+  console.log('app listening at post '+ip+':8892');
 });
