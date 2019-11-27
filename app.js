@@ -8,6 +8,8 @@ let md5 = require('md5');
 let preveMd5 = null
 
 var app = express();
+
+app.use(express.static('public'));
 const dir = '/data/api.txt';
 
 app.set('views', __dirname + '/views');
