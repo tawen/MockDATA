@@ -4,10 +4,10 @@ var DefaultLayout = require('./layouts/default');
 
 var ApiListPage = createReactClass({
   render: function() {
-  	var items = this.props.json_list.map(function (item) {
+  	var items = this.props.json_list.map(function (item,index) {
             return (
-                <li key={item.toString()}>
-                    <a href={item}>{ item }</a>
+                <li key={index}>
+                    <a href={item.method}>{ item.method }</a><a href={item.url}>{ item.url }</a>
                 </li>
                 );
         });

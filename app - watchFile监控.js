@@ -4,8 +4,6 @@ var reactViews = require('express-react-views');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var ip = require('ip');
-let md5 = require('md5');
-let preveMd5 = null
 
 var app = express();
 const dir = '/data/api.txt';
@@ -80,7 +78,6 @@ function is_valid_json(data) {
 	}
 	return true;
 }
-//读文件
 function readFile(){
 	fs.readFile(__dirname + dir, { flag: 'r+', encoding: 'utf8' }, function (err, data) {
 		if (err) {
@@ -123,16 +120,7 @@ fs.watchFile(__dirname + dir, (cur, prv) => {
 		console.log(`${__dirname + dir}文件发生更新`)
 	 }
 	}
- });
-//  fs.watch(__dirname + dir,(event,filename)=>{
-//   var currentMd5 = md5(fs.readFileSync(__dirname + dir))
-//   if (currentMd5 == preveMd5) {
-//     return
-//   }
-//   preveMd5 = currentMd5
-// 	console.log(`${filename}文件发生更新${new Date()}`);
-// 	readFile();
-// });
+ })
 
 app.get('/api/list', function (req, res, next) {
 	res.render('api_list', { title: 'API LIST', json_list: url_list });

@@ -10,6 +10,13 @@ var ApiPostPage = createReactClass({
         	<h1>接口录入页面</h1>
 	        <form action="/api/post" method="post">
 	        	<p>URL :</p><input name="url_path" type="text" style={{ width:'400px', height:'30px'}}/>
+            <p>Method :</p>
+            <select  name="method" style={{ width:'400px', height:'30px'}}>
+              <option value ="GET">GET</option>
+              <option value ="POST">POST</option>
+              <option value="PUT">PUT</option>
+              <option value="DELETE">DELETE</option>
+            </select>
 	        	<p>JSON:</p><textarea name="json_text" rows="20" cols="100"/>
 	        	<br/><input type="submit" value="提交"  style={{fontSize:'35px', width:'100px', height:'50px'}}/>
 	        </form>
